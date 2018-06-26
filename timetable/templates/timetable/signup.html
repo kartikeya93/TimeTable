@@ -1,0 +1,192 @@
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="{% static 'css/sticky-footer-navbar.css' %}" rel="stylesheet">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+</head>
+
+{% block content %}
+<body class="text-center">
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/"><img src="{% static 'img/favicon.ico' %}" ></a>
+        <a class="navbar-brand" href="/">Ela School for Girls</a>
+        </nav>
+</header>
+
+
+  {% if registered %}
+
+      <ul class="list-unstyled">
+        <li class="h1 mb-3 font-weight-normal">Thank you for registering!</li>
+        <a href="/" class="h4 mb-3 font-weight-normal">Return to the homepage</a>
+      </ul>
+
+        {% else %}
+     <div class="col-md-66666" id = "Sign_up_page">
+    <form id="user_form" method="post" action="/accounts/signup/" enctype="multipart/form-data">
+
+        <h1 class="h1 mb-3 font-weight-normal">Please Register</h1>
+        <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h2 class="h4 mb-3 font-weight-normal">Enter your details below:</h2>
+
+         {% csrf_token %}
+
+  {% if user_form.non_field_errors %}
+    <div class="alert alert-danger" role="alert">
+      {% for error in user_form.non_field_errors %}
+        {{ error }}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% for field in user_form.visible_fields %}
+      {{ field.label_tag }}
+
+      {% if user_form.is_bound %}
+        {% if field.errors %}
+          {% render_field field class="form-control is-invalid" %}
+          {% for error in field.errors %}
+            <div class="invalid-feedback">
+              {{ error }}
+            </div>
+          {% endfor %}
+        {% else %}
+          {% render_field field class="form-control is-valid" %}
+        {% endif %}
+      {% else %}
+        {% render_field field class="form-control" %}
+      {% endif %}
+
+      {% if field.help_text %}
+        <small class="form-text text-muted">{{ field.help_text }}</small>
+      {% endif %}
+  {% endfor %}
+
+    {% for hidden_field in user_form.hidden_fields %}
+    {{ hidden_field }}
+  {% endfor %}
+
+  {% if user_form.non_field_errors %}
+    <div class="alert alert-danger" role="alert">
+      {% for error in user_form.non_field_errors %}
+        {{ error }}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% for field in profile_form.visible_fields %}
+      {{ field.label_tag }}
+
+      {% if profile_form.is_bound %}
+        {% if field.errors %}
+          {% render_field field class="form-control is-invalid" %}
+          {% for error in field.errors %}
+            <small class="invalid-feedback">
+              {{ error }}
+            </small>
+          {% endfor %}
+        {% else %}
+          {% render_field field class="form-control is-valid" %}
+        {% endif %}
+      {% else %}
+        {% render_field field class="form-control" %}
+      {% endif %}
+
+      {% if field.help_text %}
+        <small class="form-text text-muted">{{ field.help_text }}</small>
+      {% endif %}
+  {% endfor %}
+        <p></p>
+      <h5><button class="btn btn-lg btn-primary btn-block" type="submit">Register</button></h5>
+        <a href="/accounts/login" class="btn btn-lg btn-default btn-block" role="button">Sign In</a>
+    </form>
+      </div>
+  {% endif %}
+  </body>
+
+    {% endblock %}
+
+<footer class="footer">
+      <div class="container-fluid">
+        <span class="text-muted">Developed by Kartikeya Singh for Ela Woman</span>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="{% static 'js/vendor/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>
+
+<style>
+
+html,
+body {
+  height: 90%;
+}
+
+
+#Sign_up_page {
+  position: absolute;
+  width: 300px;
+  height: 70%;
+  z-index: 15;
+  top: 17%;
+  left: 50%;
+  margin: -100px  0 -350px -150px;
+}
+
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: auto;
+  margin: 0 auto;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.errorlist {
+  display: inline-block;
+    padding:0;
+
+    text-align:left;
+    list-style: none;
+
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 1px;
+  font-size: 1px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: -1px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+</style>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="{% static 'css/sticky-footer-navbar.css' %}" rel="stylesheet">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+</head>
+
+<body class="text-center">
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/"><img src="{% static 'img/favicon.ico' %}" width="20"></a>
+        <a class="navbar-brand" href="/">Ela School for Girls</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        </nav>
+</header>
+
+  <div class="col-md-4" id = "Sign_in_page">
+    <form id="login_form" method="post" action="/accounts/login/">
+      <h1 class="h1 mb-3 font-weight-normal">Please sign in</h1>
+        <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+      <h2 class="h4 mb-3 font-weight-normal">Enter your details below:</h2>
+
+        {% csrf_token %}
+
+        <p><label for="inputUsername" class="sr-only">Username</label></p>
+      <input type="text" name="username" value="" class="form-control"  placeholder="Username" required="" autofocus="" >
+      <p><label for="inputPassword" class="sr-only">Password</label></p>
+      <input type="password" name="password" value="" class="form-control"  placeholder="Password" required="" >
+      <div class="checkbox mb-3">
+        <p><label>
+          <input value="remember-me" type="checkbox"> Remember me
+        </label></p>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <a href="/accounts/signup/" class="btn btn-lg btn-default btn-block" role="button">Register</a>
+    </form>
+
+      </div>
+
+<footer class="footer">
+      <div class="container-fluid">
+        <span class="text-muted">Developed by Kartikeya Singh for Ela Woman</span>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src=" js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="{% static 'js/vendor/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>
+
+<style>
+html,
+body {
+  height: 90%;
+}
+
+.login_form {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-align: center;
+  -ms-flex-pack: center;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+#Sign_in_page {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  z-index: 15;
+  top: 40%;
+  left: 50%;
+  margin: -100px 0 0 -150px;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+</style>

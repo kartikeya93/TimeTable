@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    {% load notifications_tags %}
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="{% static 'css/sticky-footer-navbar.css' %}" rel="stylesheet">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+    <style>.badge-notify{
+        background: #ff0000;
+        position:relative;
+        -moz-transform: translate(-80%, -80%); /* For Firefox */
+        -ms-transform: translate(-80%, -80%); /* for IE */
+        -webkit-transform: translate(-80%, -80%); /* For Safari, Chrome, iOS */
+        -o-transform: translate(-80%, -80%);} /* For Opera */
+</style>
+</head>
+<body class="text-center" contenteditable="false">
+{% if user.is_authenticated %}
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/"><img src="{% static 'img/favicon.ico' %}" width="20"></a>
+            <a class="navbar-brand" href="/">Ela School for Girls</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/timetable">Time Table <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                            Notifications <span class="badge badge-danger">{% live_notify_badge %}</span>
+                        </button>
+                        {% live_notify_list list_class="dropdown-menu dropdown-menu-right" %}
+
+                    </li>
+
+
+
+                    <li class="nav-item dropdown ">
+                        <button type="button" class="btn btn-light dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Profile
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Update Profile</a>
+                            <a class="dropdown-item" href="#">Raise Complaints</a>
+                            <a class="dropdown-item" href="#">Contact Us</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/accounts/logout">Sign Out</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+    <p>
+    <h2>Welcome {{ request.user.username }}!</h2>
+    </p>
+    <p><h3><a href="/timetable">Click here</a> to view your schedule.</h3></p>
+    </div>
+
+    {% else %}
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/"><img src="{% static 'img/favicon.ico' %}" width="20"></a>
+            <a class="navbar-brand" href="/">Ela School for Girls</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/timetable">Time Table <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <p><h2>Welcome to the Ela School</h2></p>
+    <p><h3>This is a portal for teachers to view their schedules.</h3></p>
+    <h4><a href="/accounts/login">Log in</a> or <a href="/accounts/signup">Sign up</a> to continue</h4>
+
+    {% endif %}
+
+    <!-- Begin page content -->
+   <!-- <main role="main" class="container">
+      <h1 class="mt-5">Sticky footer with fixed navbar</h1>
+      <p class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt; .container</code>.</p>
+      <p>Back to <a href="../sticky-footer">the default sticky footer</a> minus the navbar.</p>
+    </main>-->
+
+    <footer class="footer">
+      <div class="container-fluid">
+        <span class="text-muted">Developed by Kartikeya Singh for Ela Woman</span>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="{% static 'notifications/notify.js' %}" type="text/javascript"></script>
+    {% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' %}
+    <script src="{% static 'js/vendor/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+
+
+
+
+<style>
+html,
+body {
+  height: 90%;
+}
+
+.login_form {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-align: center;
+  -ms-flex-pack: center;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+#Sign_in_page {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  z-index: 15;
+  top: 40%;
+  left: 50%;
+  margin: -100px 0 0 -150px;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+</style>
+</body></html>
